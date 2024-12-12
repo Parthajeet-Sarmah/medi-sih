@@ -1,0 +1,174 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+  }
+
+  body {
+    @apply bg-gradient-to-br from-slate-50 to-slate-100;
+    @apply min-h-screen;
+    @apply text-base;
+    @apply antialiased;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Improve touch targets on mobile */
+  input, select, textarea, button {
+    @apply touch-manipulation;
+  }
+
+  /* Prevent text size adjustment on orientation change */
+  * {
+    -webkit-text-size-adjust: 100%;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-teal-600 text-white px-6 py-4 rounded-xl hover:bg-teal-700 
+           transition-all duration-300 ease-in-out transform hover:scale-[1.02]
+           focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-opacity-50
+           active:scale-[0.98] touch-manipulation disabled:opacity-50 
+           disabled:cursor-not-allowed text-base sm:text-lg font-medium
+           min-h-[56px] sm:min-h-[48px] shadow-sm;
+  }
+
+  .btn-secondary {
+    @apply border-2 border-teal-600 text-teal-600 px-6 py-4 rounded-xl
+           hover:bg-teal-600 hover:text-white transition-all duration-300 
+           ease-in-out transform hover:scale-[1.02] focus:outline-none 
+           focus:ring-2 focus:ring-teal-500 focus:ring-opacity-50
+           active:scale-[0.98] touch-manipulation text-base sm:text-lg font-medium
+           min-h-[56px] sm:min-h-[48px];
+  }
+
+  .card {
+    @apply bg-white rounded-xl shadow-lg p-6 sm:p-8 hover:shadow-xl 
+           transition-all duration-300 ease-in-out;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-4 rounded-xl border border-gray-200 
+           focus:outline-none focus:ring-2 focus:ring-teal-500 
+           focus:border-transparent transition-all duration-200
+           text-base sm:text-lg touch-manipulation
+           min-h-[56px] sm:min-h-[48px]
+           placeholder:text-gray-400;
+  }
+
+  /* Mobile-optimized container */
+  .mobile-container {
+    @apply px-4 sm:px-6 lg:px-8 w-full max-w-7xl mx-auto;
+  }
+
+  /* Touch-friendly navigation */
+  .nav-item {
+    @apply min-h-[48px] flex items-center px-4 py-2 rounded-lg
+           hover:bg-teal-50 transition-colors duration-200;
+  }
+
+  /* Mobile-friendly form groups */
+  .form-group {
+    @apply space-y-3 mb-6;
+  }
+
+  /* Bottom sheet for mobile */
+  .bottom-sheet {
+    @apply fixed bottom-0 left-0 right-0 bg-white rounded-t-3xl shadow-2xl
+           transform transition-transform duration-300 ease-out
+           p-6 space-y-4 z-50;
+  }
+
+  /* Mobile-friendly dropdown */
+  .dropdown-content {
+    @apply absolute z-50 w-full mt-1 py-1 bg-white rounded-xl shadow-lg 
+           border border-gray-200 max-h-[60vh] overflow-y-auto 
+           overscroll-contain;
+  }
+
+  /* Mobile-friendly scrollbar */
+  .scrollbar-thin {
+    scrollbar-width: thin;
+  }
+
+  /* Bottom navigation for mobile */
+  .bottom-nav {
+    @apply fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200
+           flex items-center justify-around p-2 z-40;
+  }
+
+  /* Mobile-friendly modal */
+  .modal {
+    @apply fixed inset-0 z-50 flex items-center justify-center p-4
+           bg-black/50 backdrop-blur-sm;
+  }
+
+  .modal-content {
+    @apply w-full max-w-md bg-white rounded-2xl shadow-2xl p-6
+           transform transition-all duration-300 ease-out;
+  }
+}
+
+/* Mobile-specific optimizations */
+@media (max-width: 640px) {
+  .input-field, .btn-primary, .btn-secondary {
+    @apply text-base py-4;
+  }
+
+  .card {
+    @apply p-5 rounded-2xl;
+  }
+
+  /* Prevent zoom on input focus in iOS */
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="number"],
+  input[type="password"],
+  select,
+  textarea {
+    @apply text-base;
+    font-size: 16px !important;
+  }
+
+  /* Better tap targets for mobile */
+  .touch-target {
+    @apply min-h-[48px] min-w-[48px];
+  }
+
+  /* Improved spacing for mobile */
+  .mobile-spacing {
+    @apply space-y-6;
+  }
+
+  /* Bottom sheet pull indicator */
+  .bottom-sheet::before {
+    content: '';
+    @apply absolute top-3 left-1/2 transform -translate-x-1/2
+           w-12 h-1.5 bg-gray-300 rounded-full;
+  }
+}
+
+/* Safe area insets for modern mobile browsers */
+@supports(padding: max(0px)) {
+  .safe-bottom {
+    padding-bottom: max(env(safe-area-inset-bottom), 1rem);
+  }
+  
+  .safe-top {
+    padding-top: max(env(safe-area-inset-top), 1rem);
+  }
+}
+
+/* Dark mode considerations */
+@media (prefers-color-scheme: dark) {
+  .input-field {
+    @apply bg-white;
+  }
+}
