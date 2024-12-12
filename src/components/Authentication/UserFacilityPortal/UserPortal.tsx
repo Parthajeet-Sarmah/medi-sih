@@ -43,19 +43,14 @@ export function UserPortal() {
       setTimeout(() => {
         setIsVerifying(false);
         // Store user data in localStorage or your preferred state management solution
-        localStorage.setItem('currentUser', JSON.stringify({
-          name: `${formData.firstName} ${formData.middleName ? formData.middleName + ' ' : ''}${formData.lastName}`,
-          email: formData.email,
-          phone: formData.phone
-        }));
-        navigate('/patient/dashboard');
+        navigate('/patient');
       }, 1500);
     } else {
       // Handle login verification
       setTimeout(() => {
         setIsVerifying(false);
         if (formData.phone === '7479191622' && /^[a-zA-Z0-9]{6}$/.test(formData.otp)) {
-          navigate('/patient/dashboard');
+          navigate('/patient');
         }
       }, 1500);
     }

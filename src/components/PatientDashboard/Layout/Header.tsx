@@ -15,6 +15,7 @@ export function Header({ isMobileMenuOpen, setIsMobileMenuOpen }: HeaderProps) {
     if(user)
     {
       const parsed = JSON.parse(user);
+      console.log(parsed);
       setName(parsed.firstName + " " + parsed.lastName);
     }
   }, [])

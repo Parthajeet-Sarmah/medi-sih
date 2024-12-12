@@ -1,6 +1,6 @@
 import React from 'react';
 import { Mail, Phone, Lock } from 'lucide-react';
-import { signUp } from '../../../../services/authService';
+import { getUserInfo, signUp } from '../../../../services/authService';
 
 interface SignUpFormProps {
   formData: {
@@ -24,6 +24,10 @@ export function SignUpForm({ formData, handleInputChange }: SignUpFormProps) {
   const handleSignUp = async (): Promise<void> => {
     try {
       const user = await signUp({ email, password, additionalInfo: { firstName, middleName, lastName, dateOfBirth, govtIdNumber }});
+      const data = await getUserInfo(email);
+
+      localStorage.setItem("currentUser", JSON.stringify(data));
+      
       alert(`User signed up: ${user.email}`);
     } catch (error: unknown) {
       const errorMessage = error instanceof Error ? error.message : "Unknown error occurred";
